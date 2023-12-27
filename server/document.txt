@@ -1,0 +1,5 @@
+1. Install dotenv, express, mongoose dependencies.
+2. Create MongoDB database and connect with the app.
+    -Declare environment variables
+    -make DB connection using mongoose library.
+    -connect to the database and then start the server in the then callback

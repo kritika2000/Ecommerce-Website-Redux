@@ -1,0 +1,28 @@
+{
+  "name": "ecommerce-server",
+  "version": "1.0.0",
+  "description": "This is the server for the ecommerce website",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kritika2000/Ecommerce-Website-Redux.git"
+  },
+  "keywords": [
+    "server",
+    "ecommerce"
+  ],
+  "author": "Kritika",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kritika2000/Ecommerce-Website-Redux/issues"
+  },
+  "homepage": "https://github.com/kritika2000/Ecommerce-Website-Redux#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
+  }
+}
