@@ -1,5 +1,6 @@
 require('dotenv').config(); // get env variables
 const jwt = require('jsonwebtoken');
+const User = require('../model/User');
 
 /**
  * THIS MIDDLEWARE WILL BE EXECUTED BEFORE EVERY PROTECTED ROUTE,
