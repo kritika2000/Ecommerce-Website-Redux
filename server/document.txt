@@ -1,5 +1,29 @@
-1. Install dotenv, express, mongoose dependencies.
-2. Create MongoDB database and connect with the app.
-    -Declare environment variables
-    -make DB connection using mongoose library.
-    -connect to the database and then start the server in the then callback
+App features:-
+
+1. DATABASE
+Collections:-
+Products -> Store all the Products
+Users -> Store info of registered Users
+Cart -> Store cart items of individual Users
+Orders -> Store order details of individual users.
+
+2. PRODUCTS
+    -Each user can view all products stored in the DB.
+    -An admin can make all CRUD operations to the products.
+
+3. USERS
+    -A user can create an account, which creates a new user in the users collection with email, password, name.
+    -A user can then login to access his account.
+
+4. CARTS
+    -Each cart in the carts collection, contains the products added by the user in his cart.
+    -A user can add or remove an item from the cart. Each cart item must have a quantity field as well.
+    -Cart Operations:- 
+        --A user can all items to cart(Create)
+        --A user can update a cart(when quantity field is updated)
+        --A user can delete items from cart.
+    -Cart APIs will be protected i.e. they will go through one middleware
+    function which authorizes the user and puts the current user email in
+    request object.
+
+
