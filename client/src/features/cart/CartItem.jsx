@@ -23,9 +23,7 @@ function CartItem({ item }) {
             <p className="item__title">{capitalize(item.title)}</p>
             <button
               className="item__remove"
-              onClick={() =>
-                dispatch(CartThunkAPI.removeFromCartThunk(item.id))
-              }
+              onClick={() => dispatch(CartThunkAPI.removeFromCart(item.id))}
             >
               Remove
             </button>

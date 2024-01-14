@@ -11,21 +11,27 @@ import ProductDetails, {
 import Spinner from './components/Loader';
 import Login from './features/user/Login';
 import Register from './features/user/Register';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import UserThunkAPI from './features/user/UserThunkAPI';
 
 function App() {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
+  /* 
+    THIS ACTION WILL BE FIRED WHEN THE APP RENDERS FOR THE FIRST
+    TIME ONLY, WHICH MAKES SURE THE USER REMAINS LOGGED IN UNLESS
+    THE CORRECT ACCESS TOKEN EXISTS IN LOCAL STORAGE.
+  */
   React.useEffect(() => {
-    /* 
-      THIS ACTION WILL BE FIRED WHEN THE APP RENDERS FOR THE FIRST
-      TIME ONLY, WHICH MAKES SURE THE USER REMAINS LOGGED IN UNLESS
-      THE CORRECT ACCESS TOKEN EXISTS IN LOCAL STORAGE.
-    */
     dispatch(UserThunkAPI.authorizeUser());
   }, []);
+
+  React.useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      dispatch(UserThunkAPI.logoutUser());
+    }, 60000 * 24 * 60);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: '/login',
@@ -49,7 +55,7 @@ function App() {
               element: <Products />,
               errorElement: <Error />,
               fallbackElement: <Loader />,
-              loader: () => productsLoader(dispatch, currentUser),
+              loader: () => productsLoader(dispatch),
             },
             {
               path: ':id',

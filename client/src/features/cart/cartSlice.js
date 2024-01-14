@@ -35,6 +35,10 @@ const cartSlice = createSlice({
       state.errMessage = null;
       state.cart.push(action.payload);
     });
+    builder.addCase(CartThunkAPI.addToCart.rejected, (state, action) => {
+      state.status = 'error';
+      state.errMessage = action.payload;
+    });
 
     // UPDATE CART
     builder.addCase(CartThunkAPI.updateCart.fulfilled, (state, action) => {
@@ -46,6 +50,10 @@ const cartSlice = createSlice({
           : { ...item, quantity: action.payload.quantity }
       );
     });
+    builder.addCase(CartThunkAPI.updateCart.rejected, (state, action) => {
+      state.status = 'error';
+      state.errMessage = action.payload;
+    });
 
     // REMOVE FROM CART
     builder.addCase(CartThunkAPI.removeFromCart.fulfilled, (state, action) => {
@@ -53,12 +61,20 @@ const cartSlice = createSlice({
       state.errMessage = null;
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     });
+    builder.addCase(CartThunkAPI.removeFromCart.rejected, (state, action) => {
+      state.status = 'error';
+      state.errMessage = action.payload;
+    });
 
     // CLEAR CART
     builder.addCase(CartThunkAPI.clearCart.fulfilled, (state) => {
       state.loading = 'success';
       state.errMessage = null;
       state.cart = [];
+    });
+    builder.addCase(CartThunkAPI.clearCart.rejected, (state, action) => {
+      state.status = 'error';
+      state.errMessage = action.payload;
     });
   },
 });

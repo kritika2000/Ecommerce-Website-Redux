@@ -1,14 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-import { useLoaderData } from 'react-router-dom';
-import ProductAPI from '../../api/apiProducts';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import Product from './Product';
+import ProductAPI from '../../api/apiProducts';
 import CartThunkAPI from '../cart/CartThunkAPI';
 
-export async function productsLoader(dispatch, currentUser) {
+export async function productsLoader(dispatch) {
   // loaders intercept the request being made to the server to fetch products
   try {
     const products = await ProductAPI.getProducts();
-    currentUser && dispatch(CartThunkAPI.setCart());
+    dispatch(CartThunkAPI.setCart());
     return products;
   } catch (err) {
     throw new Error(err);

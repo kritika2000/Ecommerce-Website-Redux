@@ -7,7 +7,9 @@ class AuthController {
     }).exec();
     return res.status(200).json({
       success: true,
-      currentUser: { userId, username },
+      userId,
+      username,
+      accessToken: req.accessToken,
     });
   }
 }

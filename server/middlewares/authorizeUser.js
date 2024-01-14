@@ -38,18 +38,16 @@ async function authorizeUser(req, res, next) {
       );
       // create a new access token, if the refresh token is verified
       const accessToken = jwt.sign(
-        { username: foundUser.username },
+        { userId: foundUser.userId, username: foundUser.username },
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: '5m' }
       );
-      // returns the new access token
-      return res.status(200).json({
-        success: true,
-        accessToken,
-      });
+      req.userId = decoded.userId;
+      req.accessToken = accessToken;
+      next();
     } catch (err) {
       // incorrect refresh token
-      res.sendStatus(403);
+      return res.sendStatus(403);
     }
   }
 }

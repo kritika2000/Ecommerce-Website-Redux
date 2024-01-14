@@ -91,12 +91,13 @@ const userSlice = createSlice({
 
     // AUTHORIZE
     builder.addCase(UserThunkAPI.authorizeUser.fulfilled, (state, action) => {
-      const { currentUser } = action.payload;
+      const { userId, username, accessToken } = action.payload;
       state.status = 'success';
       state.currentUser = {
-        userId: currentUser.userId,
-        username: currentUser.username,
+        userId,
+        username,
       };
+      LocalStorage.setAccessToken(accessToken);
       state.errMessage = null;
     });
     builder.addCase(UserThunkAPI.authorizeUser.rejected, (state) => {
