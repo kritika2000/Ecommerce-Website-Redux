@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import capitalize from '../utils/capitalize';
 import UserThunkAPI from '../features/user/UserThunkAPI';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // Import images/assets in vite -> https://medium.com/@andrewmasonmedia/how-to-use-images-with-vite-and-vue-937307a150c0
 function Header() {
   const { cart } = useSelector((state) => state.cart);
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, status } = useSelector((state) => state.user);
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,8 +44,11 @@ function Header() {
               ? dispatch(UserThunkAPI.logoutUser())
               : navigate('/login');
           }}
+          style={status === 'loading' ? { opacity: 0.6 } : {}}
+          disabled={status === 'loading'}
         >
-          {!currentUser ? 'Sign In' : 'Sign Out'}
+          {status === 'loading' && <ClipLoader color="#051320" size={20} />}
+          <span>{!currentUser ? 'Sign In' : 'Sign Out'}</span>
         </button>
         {location.pathname !== '/cart' && (
           <div

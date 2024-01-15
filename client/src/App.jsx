@@ -16,14 +16,6 @@ import UserThunkAPI from './features/user/UserThunkAPI';
 
 function App() {
   const dispatch = useDispatch();
-  /* 
-    THIS ACTION WILL BE FIRED WHEN THE APP RENDERS FOR THE FIRST
-    TIME ONLY, WHICH MAKES SURE THE USER REMAINS LOGGED IN UNLESS
-    THE CORRECT ACCESS TOKEN EXISTS IN LOCAL STORAGE.
-  */
-  React.useEffect(() => {
-    dispatch(UserThunkAPI.authorizeUser());
-  }, []);
 
   React.useEffect(() => {
     const timeoutId = setTimeout(() => {
